@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:note_with_me/data/local/db_helper.dart';
 import 'package:note_with_me/domain/constants/ui_helper.dart';
 
@@ -31,23 +32,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: UiHelper.appBgColor,
       // all notes viewed here
       body: Stack(
         children: [
           Positioned(
-            top: 50,
-            left: 0,
-            right: 0,
+            top: screenHeight * 0.07,
+            left: screenWidth * 0.06,
+            right: screenWidth * 0.06,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0).w,
               child: Text(
                 'Your notes are in my backpack',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 25.sp,
                   fontFamily: 'storyscript',
-                  letterSpacing: 2,
+                  letterSpacing: 2.w,
                   fontWeight: FontWeight.bold,
                   color: UiHelper.headlineColor,
                 ),
@@ -55,9 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
+            top: screenHeight * 0.01,
+            left: screenWidth * 0,
+            right: screenWidth * 0,
             child: Image.asset(
               'assets/images/homescreen_panda_img-removebg-preview.png',
 
@@ -65,16 +68,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            top: 350,
-            right: 15,
+            top: screenHeight * 0.39,
+            right: screenWidth * 0.05,
             child: Container(
-              height: 600,
-              width: 380,
+              height: screenHeight * 0.70,
+              width: screenWidth * 0.90,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
+                  topLeft: Radius.circular(40.r),
+                  topRight: Radius.circular(40.r),
                 ),
                 boxShadow: [
                   BoxShadow(color: Colors.grey, blurRadius: 5, spreadRadius: 2),
@@ -95,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             allNotes[index][DBHelper.COLUMN_NOTE_DESC],
                           ),
                           trailing: SizedBox(
-                            width: 60,
+                            width: 60.w,
                             child: Row(
                               children: [
                                 InkWell(
@@ -124,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Color(0XFF594E73),
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                SizedBox(width: 10.w),
                                 InkWell(
                                   onTap: () async {
                                     bool check = await dbRef!.deleteNote(
@@ -174,23 +177,23 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Text(
             isUpdate ? 'Update Note' : "Add Note",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 21),
+          SizedBox(height: 21.h),
           TextFormField(
             controller: titleController,
             decoration: InputDecoration(
               hintText: "Enter title here",
               label: Text("Title *"),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(11),
+                borderRadius: BorderRadius.circular(11.r),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(11),
+                borderRadius: BorderRadius.circular(11.r),
               ),
             ),
           ),
-          SizedBox(height: 21),
+          SizedBox(height: 21.h),
           TextFormField(
             controller: descController,
             maxLines: 4,
@@ -198,23 +201,23 @@ class _HomeScreenState extends State<HomeScreen> {
               hintText: "Enter description here",
               label: Text("Des *"),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(11),
+                borderRadius: BorderRadius.circular(11.r),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(11),
+                borderRadius: BorderRadius.circular(11.r),
               ),
             ),
           ),
-          SizedBox(height: 21),
+          SizedBox(height: 21.h),
           Row(
             children: [
               Expanded(
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(11),
+                      borderRadius: BorderRadiusGeometry.circular(11.r),
                     ),
-                    side: BorderSide(width: 1, color: Colors.black),
+                    side: BorderSide(width: 1.w, color: Colors.black),
                   ),
                   onPressed: () async {
                     var title = titleController.text.trim();
@@ -244,14 +247,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Text(isUpdate ? "Update Note" : "Add Note"),
                 ),
               ),
-              SizedBox(width: 11),
+              SizedBox(width: 11.w),
               Expanded(
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(11),
+                      borderRadius: BorderRadiusGeometry.circular(11.r),
                     ),
-                    side: BorderSide(width: 1, color: Colors.black),
+                    side: BorderSide(width: 1.w, color: Colors.black),
                   ),
                   onPressed: () {
                     Navigator.pop(context);
